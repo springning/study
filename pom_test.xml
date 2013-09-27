@@ -1,0 +1,361 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- groupId: groupId:项目或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.mycompany.app生成的相对路径为：/com/mycompany/app -->
+	<groupId>asia.qintianjie</groupId>
+	<!-- artifactId: 项目的通用名称 -->
+	<artifactId>qintianjie-maven2</artifactId>
+	<!-- packaging: 打包的机制，如pom, jar, maven-plugin, ejb, war, ear, rar, par -->
+	<packaging>jar</packaging>
+	<!-- version:项目的版本 -->
+	<version>1.0-SNAPSHOT</version>
+	<!-- 项目的名称， Maven 产生的文档用 -->
+	<name>qintianjie-maven</name>
+	<!-- 哪个网站可以找到这个项目,提示如果 Maven 资源列表没有，可以直接上该网站寻找, Maven 产生的文档用 -->
+	<url>http://www.qintianjie.asia</url>
+	<!-- 项目的描述, Maven 产生的文档用 -->
+	<description>A maven project to study maven.</description>
+	<!-- 开发者信息 -->
+	<developers>
+		<developer>
+			<id>Qintj</id>
+			<name>Qin Tianjie</name>
+			<email>qininin@163.com</email>
+			<roles>
+				<role>Project Manager</role>
+				<role>Architect</role>
+			</roles>
+			<organization>qintianjie</organization>
+			<organizationUrl>http://www.qintianjie.asia</organizationUrl>
+			<properties>
+				<dept>No</dept>
+			</properties>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
+	<!-- 类似 developers -->
+	<contributors></contributors>
+	<!-- 本项目相关 mail list, 用于订阅等信息 -->
+	<mailingLists>
+		<mailingList>
+			<name>Qin Tianjie</name>
+			<!-- Link mail -->
+			<post>qininin@163.com</post>
+			<!-- mail for subscribe the project -->
+			<subscribe>qininin@163.com</subscribe>
+			<!-- mail for unsubscribe the project -->
+			<unsubscribe>qininin@163.com</unsubscribe>
+			<archive>
+                http://mail-archives.qintianjie.com/qintianjie/dev/
+            </archive>
+		</mailingList>
+	</mailingLists>
+	<!-- 项目的问题管理系统(Bugzilla, Jira, Scarab,或任何你喜欢的问题管理系统)的名称和URL，本例为 jira -->
+	<issueManagement>
+		<system>jira</system>
+		<url>http://jira.qintianjie.asia</url>
+	</issueManagement>
+	<!-- organization information -->
+	<organization>
+		<name>qintianjie</name>
+		<url>http://www.qintianjie.asia</url>
+	</organization>
+	<!-- License -->
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.qintianjie.asiz/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<!-- - scm(software configuration management)标签允许你配置你的代码库，为Maven web站点和其它插件使用。 
+		- 如果你正在使用CVS或Subversion，source repository页面同样能给如何使用代码库的详细的、工具相关的指令。 - 下面是一个典型SCM的配置例子 -->
+	<scm>
+		<!-- 项目在 svn 上对应的资源 -->
+		<connection>
+            scm:svn:http://svn.qintianjie.asia/maven/qintianjie/qintianjie-maven2-trunk(dao-trunk)
+        </connection>
+		<developerConnection>
+            scm:svn:http://svn.qintianjie.asia/maven/qintianjie/dao-trunk
+        </developerConnection>
+		<url>http://svn.qintianjie.asia</url>
+	</scm>
+	<!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
+	<distributionManagement>
+		<!-- 配置到文件系统 -->
+		<repository>
+			<id>qintianjie-maven2</id>
+			<name>qintianjie maven2</name>
+			<url>file://${basedir}/target/deploy</url>
+		</repository>
+		<!-- 使用ssh2配置 -->
+		<snapshotRepository>
+			<id>qintianjie-maven2</id>
+			<name>Tqintianjie-maven2 Snapshot Repository</name>
+			<url>scp://svn.qintianjie.asia:/usr/local/maven-snapshot</url>
+		</snapshotRepository>
+		<!-- 使用ssh2配置 -->
+		<site>
+			<id>qintianjie-site</id>
+			<name>business api website</name>
+			<url>
+                scp://svn.qintianjie.asia:/var/www/localhost/qintianjie-web
+            </url>
+		</site>
+	</distributionManagement>
+	<!-- 依赖关系 -->
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<!-- scope 说明 - compile ：默认范围，用于编译 - provided：类似于编译，但支持你期待jdk或者容器提供，类似于classpath 
+				- runtime: 在执行时，需要使用 - test: 用于test任务时使用 - system: 需要外在提供相应得元素。通过systemPath来取得 
+				- systemPath: 仅用于范围为system。提供相应的路径 - optional: 标注可选，当项目自身也是依赖时。用于连续依赖时使用 -->
+			<scope>test</scope>
+			<!-- - systemPath: 仅用于范围为system。提供相应的路径 - optional: 标注可选，当项目自身也是依赖时。用于连续依赖时使用 -->
+			<!-- <type>jar</type> <optional>true</optional> -->
+		</dependency>
+
+		<!-- - 外在告诉maven你只包括指定的项目，不包括相关的依赖。此因素主要用于解决版本冲突问题 - 如下依赖表示 项目acegi-security依赖 
+			org.springframework.XXX 项目，但我们不需要引用这些项目 -->
+		<dependency>
+			<groupId>org.acegisecurity</groupId>
+			<artifactId>acegi-security</artifactId>
+			<version>1.0.5</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-support</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-jdbc</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-remoting</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>2.5.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>8.2-504.jdbc4</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.1.0.6</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+	<!-- - maven proxy, 本地仓库，替代 maven.apache.org 网站 jar 列表，用户下载时，首先寻找该站点 - 如资源找到，则下载。否则才去 
+		jar 列表网站。对多人团队，可节省下载速度和个人存储空间。 -->
+	<repositories>
+		<repository>
+			<id>qintianjie-repository-proxy</id>
+			<name>qintianjie-repository-proxy</name>
+			<url>http://192.168.1.169:9999/repository/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<build>
+		<!-- finalName: 生成最后的文件的样式 qintianjie-maven-1.0-SNAPSHOP.jar -->
+		<finalName>qintianjie-maven2</finalName>
+		<!-- defaultGoal: 定义默认的目标或者阶段。如compile, package, install等， - 当cmd中执行 mvn 
+			时， 默认为 mvn <defaultGoal>.value，如： mvn package -->
+		<defaultGoal>package</defaultGoal>
+		<!-- directory: 编译输出的目录,该编译目录为 qintianjie-maven.jar -->
+		<directory>d:\maventest</directory>
+		<!-- qintianjie-maven project 目录下有一个 qintianjie.properties 文件 -->
+		<filters>
+			<!-- filter>qintianjie.properties</filter -->
+			<filter>
+                ${basedir}/src/main/plexus/qintianjie.properties
+            </filter>
+		</filters>
+
+		<!-- 指定资源位置，默认为 src\main\resources 目录 -->
+		<resources>
+			<resource>
+				<!-- 编译后在 classes 中位置，本文为 classes\META-INF\plexus -->
+				<targetPath>META-INF/plexus</targetPath>
+				<!-- 资源位置 -->
+				<directory>${basedir}/src/main/plexus</directory>
+				<!-- - filtering: 是否替换资源中的属性placehold, 为 true 则替换，对合适的任何文件 *.xml, *.jsp 
+					等过滤 - 例如： 假设 qintianjie.properties 内容为: name=Qin Tianjie - configuration.xml 
+					内容为: My name is ${name}; - 则 编译后 configuration.xml 内容为： My name is Qin Tianjie; -->
+				<filtering>true</filtering>
+				<!-- 包含的资源, 注意最后一个 include -->
+				<includes>
+					<include>configuration.xml</include>
+					<include>configuration2.xml</include>
+					<include>*.xml</include>
+					<include>*.*</include>
+					<!-- 包含本目录和所有子目录文件，很重要，否则只是当前目录文件 -->
+					<include>**/**</include>
+				</includes>
+				<!-- 不包含 *.properties 形式文件 -->
+				<excludes>
+					<exclude>**/*.properties</exclude>
+					<!-- <exclude>**/*.properties</exclude> -->
+				</excludes>
+			</resource>
+
+			<!-- 系统默认资源 -->
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<!-- Java 源码位置 -->
+		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+
+		<!-- 一些其他目录的设置 -->
+		<scriptSourceDirectory>
+            ${basedir}/src/main/scripts
+        </scriptSourceDirectory>
+		<testSourceDirectory>
+            ${basedir}/src/test/java
+        </testSourceDirectory>
+		<outputDirectory>${basedir}/target/classes</outputDirectory>
+		<testOutputDirectory>
+            ${basedir}/target/test-classes
+        </testOutputDirectory>
+
+		<!-- 配置 JDK 版本和字符编码 -->
+		<plugins>
+			<!-- 字符编码 -->
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<!-- configuration: 指定插件配置 -->
+				<configuration>
+					<outputEncoding>UTF-8</outputEncoding>
+					<inputEncoding>UTF-8</inputEncoding>
+				</configuration>
+			</plugin>
+			<!-- JDK 版本 -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>utf-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 用于在site阶段输出报表。特定的maven 插件能输出相应的定制和配置报表。 - 参考: http://maven.apache.org/plugins/ -->
+	<reporting>
+		<!-- 产生文档的位置 -->
+		<outputDirectory>${basedir}/target/site/maven</outputDirectory>
+		<plugins>
+			<!-- maven project 报表插件 -->
+			<plugin>
+				<artifactId>
+                    maven-project-info-reports-plugin
+                </artifactId>
+				<configuration>
+					<!-- 页面编码，设置与你匹配的编码 -->
+					<encoding>GBK</encoding>
+					<charset>GBK</charset>
+					<!-- outputDirectory>${basedir}/target/site/maven</outputDirectory> 
+						<inputEncoding>utf-8</inputEncoding> <outputEncoding>utf-8</outputEncoding -->
+				</configuration>
+				<!-- reportSets> <reportSet> <id>sunlink</id> <reports> <report>javadoc</report> 
+					</reports> <inherited>true</inherited> <configuration> <links> <link>http://java.sun.com/j2se/1.5.0/docs/api/</link> 
+					</links> </configuration> </reportSet> </reportSets -->
+			</plugin>
+			<!-- Java API 文档 -->
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<encoding>GBK</encoding>
+					<charset>GBK</charset>
+				</configuration>
+			</plugin>
+			<!-- 生成源代码的一个有索引和交叉查考的HTML版本 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+				<configuration>
+					<encoding>GBK</encoding>
+					<charset>GBK</charset>
+				</configuration>
+			</plugin>
+			<!-- Maven在build构建过程中完全整合了单元测试—默认情况下, 每一次构建都会运行所有的单元测试。 - surefire插件运行所有的单元测试，然后生成一个详细报表 -->
+			<plugin>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<configuration>
+					<encoding>GBK</encoding>
+					<charset>GBK</charset>
+				</configuration>
+			</plugin>
+			<!-- 生成测试覆盖报表,测试覆盖率可以很好的显示你的单元测试的质量如何。 - 它简单的告诉你有多少代码被单元测试运行到了，而这能给你检测测试质量的好主意。 -->
+			<plugin>
+				<artifactId>maven-clover-plugin</artifactId>
+			</plugin>
+			<!-- 自动代码分析有助于提高代码质量和鼓励良好的编码习惯。Checkstyle运行多而广的 - 测试以检查是否符合强制的代码标准和最佳实践。PMD更多的专注于语义上的错误和潜在的bug。 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<!-- JKD 版本 -->
+					<targetjdk>1.6</targetjdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+						<ruleset>/rulesets/controversial.xml</ruleset>
+					</rulesets>
+					<format>xml</format>
+					<!-- 是否显示超链接 -->
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+				</configuration>
+			</plugin>
+			<!-- - changes-maven-plugin插件使用一种特别的XML文件(src/changes/changes.xml) - 来记录每次发布的版本和更改。 
+				文件格式见最后： -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>changes-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>changelog-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
